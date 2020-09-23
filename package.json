@@ -10,10 +10,11 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "dev": "nodemon server/index.js",
-    "lint": "eslint"
+    "lint": "eslint client/src/index.jsx server/index.js"
   },
   "dependencies": {
     "express": "^4.17.1",
+    "path": "^0.12.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
@@ -27,7 +28,7 @@
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react": "^7.21.1",
     "eslint-plugin-react-hooks": "^4.1.2",
     "nodemon": "^2.0.4",
     "webpack": "^4.44.2",
