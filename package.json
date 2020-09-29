@@ -11,12 +11,14 @@
     "react-dev": "webpack -d --watch",
     "dev": "nodemon server/index.js",
     "lint": "eslint client/src/index.jsx server/index.js",
+    "seed": "node database/seed.js",
     "test": "mocha specs/spec.js"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
     "chai": "^4.2.0",
     "express": "^4.17.1",
+    "jquery": "^3.5.1",
     "mongoose": "^4.13.21",
     "path": "^0.12.7",
     "react": "^16.13.1",
