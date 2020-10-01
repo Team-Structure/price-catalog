@@ -23,8 +23,6 @@ describe('Database seeded', () => {
   });
 
   it('Database seeded with 10 Sellers', () => {
-    // mongoose.connect('mongodb://localhost/seller-catalog', { useMongoClient: true });
-    // const db = mongoose.connection;
     let sellerCount = 0;
     Seller.count()
       .then((count) => {

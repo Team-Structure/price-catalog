@@ -29,7 +29,7 @@ for (let i = 1; i < 101; i++) {
   products.push(new Price(productMeta).save());
 }
 
-// Prepare seller documents
+// Preparing seller documents
 
 const sellers = [];
 const nameOptions = [
@@ -92,13 +92,10 @@ const db = mongoose.connection;
 db.once('open', () => {
   console.log('Deleting DB Now!');
   db.db.dropDatabase()
-    .then(() => {
-      Promise.all(products)
-        .then(() => {
-          Promise.all(sellers)
-            .then(() => {
-              mongoose.disconnect();
-            });
-        });
+    .then(() => Promise.all(products))
+    .then(() => Promise.all(sellers))
+    .then(() => mongoose.disconnect())
+    .catch((err) => {
+      console.log(err);
     });
 });

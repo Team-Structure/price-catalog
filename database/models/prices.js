@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
 
 const priceSchema = new mongoose.Schema({
   productId: { type: Number, unique: true },

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
 
 const sellerSchema = new mongoose.Schema({
   id: { type: Number, unique: true },
