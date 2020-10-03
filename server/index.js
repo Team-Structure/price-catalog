@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+// eslint-disable-next-line no-unused-vars
 const db = require('../database');
 const router = require('./routes');
 

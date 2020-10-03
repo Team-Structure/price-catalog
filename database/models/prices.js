@@ -12,12 +12,13 @@ const priceSchema = new mongoose.Schema({
 
 const Price = mongoose.model('Price', priceSchema);
 
-const retrieveQuotes = () => Price.find()
-  .limit(5)
+const retrievePrices = () => Price.find()
+  .limit()
+  .sort({ productId: 1, 'seller.price': 1 })
   .then((data) => data)
   .catch((err) => console.log(err));
 
 module.exports = {
   Price,
-  retrieveQuotes,
+  retrievePrices,
 };
