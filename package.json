@@ -10,9 +10,9 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "dev": "nodemon server/index.js",
-    "lint": "eslint client/src/index.jsx server/index.js",
+    "lint": "eslint client/src/index.jsx server services",
     "seed": "node database/seed.js",
-    "test": "mocha specs/spec.js"
+    "test": "nyc mocha specs/spec.js"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
@@ -38,6 +38,7 @@
     "eslint-plugin-react": "^7.21.1",
     "eslint-plugin-react-hooks": "^4.1.2",
     "nodemon": "^2.0.4",
+    "nyc": "^15.1.0",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }

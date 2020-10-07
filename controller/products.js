@@ -15,20 +15,22 @@ const sellers = (req, res) => {
 const quotes = (req, res) => {
   let priceInfo;
   let sellerInfo;
+  let id = null;
+  if (req.query.productId) {
+    id = req.query.productId;
+  }
 
   retrieveSellers()
     .then((data) => {
       sellerInfo = data;
-      return retrievePrices();
+      return retrievePrices(id);
     })
     .then((data) => {
       priceInfo = data;
       return true;
     })
-    .then(() => {
-      createQuotes(priceInfo, sellerInfo, req.query);
-    });
-  res.send('Hello World!');
+    .then(() => createQuotes(priceInfo, sellerInfo, req.query.sellerLimit))
+    .then((data) => res.send(data));
 };
 
 module.exports = {

@@ -12,11 +12,18 @@ const priceSchema = new mongoose.Schema({
 
 const Price = mongoose.model('Price', priceSchema);
 
-const retrievePrices = () => Price.find()
-  .limit()
-  .sort({ productId: 1, 'seller.price': 1 })
-  .then((data) => data)
-  .catch((err) => console.log(err));
+const retrievePrices = (id) => {
+  if (id) {
+    return Price.find({ productId: id })
+      .sort({ productId: 1 })
+      .then((data) => data)
+      .catch((err) => console.log(err));
+  }
+  return Price.find()
+    .sort({ productId: 1 })
+    .then((data) => data)
+    .catch((err) => console.log(err));
+};
 
 module.exports = {
   Price,

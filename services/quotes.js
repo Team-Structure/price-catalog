@@ -1,17 +1,55 @@
-module.exports.createQuotes = (prices, sellers, query) => {
-  // const response = [];
-  // for (let i = 0; i < prices.length; i++) {
-  //   const product = {
-  //     productId: prices[i].productId,
-  //     seller: [],
-  //   };
-  //   seller = {
-  //     id: prices.seller.id,
-  //     price: prices.seller.price,
-  //     tax: prices.seller.tax,
-  //   },
+const {
+  name,
+  offer,
+  returnPolicy,
+  shippingFee,
+} = require('./helper');
 
-  //   const shippingFee =
+/* eslint-disable no-plusplus */
+module.exports.createQuotes = (prices, sellers, limit) => {
+  const response = [];
+  const fetchSellerMeta = (num, tag, array) => {
+    if (tag === 'name') {
+      return name(num, array);
+    }
+    if (tag === 'offer') {
+      return offer(num, array);
+    }
+    if (tag === 'returnPolicy') {
+      return returnPolicy(num, array);
+    }
+    if (tag === 'shippingFee') {
+      return shippingFee(num, array);
+    }
+    return null;
+  };
 
-  // }
+  for (let i = 0; i < prices.length; i++) {
+    const product = {
+      productId: prices[i].productId,
+      seller: [],
+    };
+
+    for (let j = 0; j < prices[i].seller.length; j++) {
+      const { id, price, tax } = prices[i].seller[j];
+      const deliveryFee = fetchSellerMeta(id, 'shippingFee', sellers);
+      const sellerObject = {
+        id,
+        price,
+        tax,
+        shippingFee: deliveryFee,
+        totalPrice: (price + tax + deliveryFee).toFixed(2),
+        returnPolicy: fetchSellerMeta(id, 'returnPolicy', sellers),
+        name: fetchSellerMeta(id, 'name', sellers),
+        offer: fetchSellerMeta(id, 'offer', sellers),
+      };
+      product.seller.push(sellerObject);
+    }
+    product.seller.sort((a, b) => a.price - b.price);
+    if (limit) {
+      product.seller.splice(limit);
+    }
+    response.push(product);
+  }
+  return response;
 };
