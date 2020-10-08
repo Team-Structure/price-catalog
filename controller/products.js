@@ -3,8 +3,14 @@ const { retrieveSellers } = require('../database/models/sellers');
 const { createQuotes } = require('../services/quotes');
 
 const prices = (req, res) => {
-  retrievePrices()
-    .then((productData) => res.send(productData));
+  console.log('log', req.query.productId);
+  if (req.query.productId !== undefined) {
+    retrievePrices(req.query.productId)
+      .then((productData) => res.send(productData));
+  } else {
+    retrievePrices()
+      .then((productData) => res.send(productData));
+  }
 };
 
 const sellers = (req, res) => {

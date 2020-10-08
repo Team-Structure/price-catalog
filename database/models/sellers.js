@@ -16,9 +16,7 @@ const Seller = mongoose.model('Seller', sellerSchema);
 
 const retrieveSellers = () => Seller.find()
   .limit()
-  .sort({ productId: 1 })
-  .then((data) => data)
-  .catch((err) => console.log(err));
+  .sort({ productId: 1 });
 
 module.exports = {
   Seller,

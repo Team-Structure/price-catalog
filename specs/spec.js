@@ -43,10 +43,22 @@ describe('Test API routes', () => {
     'Sit Amet',
   ];
 
+  it('Fetch product pricing data with productId, test /product/prices route', () => {
+    request.get('/api/product/prices?productId=1')
+      .expect((res) => {
+        expect(res.body[0].productId).to.equal(1);
+        expect(res.body.length).to.equal(1);
+      })
+      .end((err) => {
+        if (err) throw err;
+      });
+  });
+
   it('Fetch product pricing data, test /product/prices route', () => {
     request.get('/api/product/prices')
       .expect((res) => {
         expect(priceOptions.includes(res.body[0].seller[0].price)).to.equal(true);
+        expect(res.body.length).to.equal(100);
       })
       .end((err) => {
         if (err) throw err;

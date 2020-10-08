@@ -15,14 +15,10 @@ const Price = mongoose.model('Price', priceSchema);
 const retrievePrices = (id) => {
   if (id) {
     return Price.find({ productId: id })
-      .sort({ productId: 1 })
-      .then((data) => data)
-      .catch((err) => console.log(err));
+      .sort({ productId: 1 });
   }
   return Price.find()
-    .sort({ productId: 1 })
-    .then((data) => data)
-    .catch((err) => console.log(err));
+    .sort({ productId: 1 });
 };
 
 module.exports = {
