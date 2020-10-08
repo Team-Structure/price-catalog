@@ -1,0 +1,22 @@
+image: node:14.7.0
+
+cache:
+  paths:
+    - node_modules/
+
+services:
+   - mongo:latest
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - npm install
+
+test:
+  stage: test
+  script:
+    - npx mocha specs/spec.js
