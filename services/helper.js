@@ -1,18 +1,15 @@
 /* eslint-disable no-plusplus */
 
 const sellerName = (id, sellers) => {
-  let name = '';
   for (let i = 0; i < sellers.length; i++) {
     if (sellers[i].id === id) {
-      name = sellers[i].name;
-      break;
+      return sellers[i].name;
     }
   }
-  return name;
+  return '';
 };
 
 const sellerOffer = (id, sellers) => {
-  let offer = '';
   const dayOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   for (let i = 0; i < sellers.length; i++) {
@@ -21,36 +18,31 @@ const sellerOffer = (id, sellers) => {
       const deliveryDay = new Date();
       deliveryDay.setDate(deliveryDay.getDate() + delivery.days);
       if (delivery.free === 'True') {
-        offer = `Free delivery by ${dayOfTheWeek[deliveryDay.getDay()]}, ${month[deliveryDay.getMonth()]} ${deliveryDay.getDate()}`;
-      } else {
-        offer = `Spend $${delivery.minimumPurchase} for free delivery by ${dayOfTheWeek[deliveryDay.getDay()]}, ${month[deliveryDay.getMonth()]} ${deliveryDay.getDate()}`;
+        return `Free delivery by ${dayOfTheWeek[deliveryDay.getDay()]}, ${month[deliveryDay.getMonth()]} ${deliveryDay.getDate()}`;
       }
+      return `Spend $${delivery.minimumPurchase} for free delivery by ${dayOfTheWeek[deliveryDay.getDay()]}, ${month[deliveryDay.getMonth()]} ${deliveryDay.getDate()}`;
     }
   }
-  return offer;
+  return '';
 };
 
 const sellerReturnPolicy = (id, sellers) => {
-  let returnPolicy = '';
   for (let i = 0; i < sellers.length; i++) {
     if (sellers[i].id === id) {
-      returnPolicy = sellers[i].returnPolicy;
-      break;
+      return sellers[i].returnPolicy;
     }
   }
-  return returnPolicy;
+  return '';
 };
 
 const sellerShippingFee = (id, sellers) => {
-  let shippingFee = '';
   for (let i = 0; i < sellers.length; i++) {
     const { delivery } = sellers[i];
     if (sellers[i].id === id) {
-      shippingFee = delivery.fee;
-      break;
+      return delivery.fee;
     }
   }
-  return shippingFee;
+  return '';
 };
 
 module.exports = {
