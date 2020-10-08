@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 
 const priceSchema = new mongoose.Schema({
   productId: { type: Number, unique: true },
@@ -9,4 +10,18 @@ const priceSchema = new mongoose.Schema({
   }],
 });
 
-module.exports.Price = mongoose.model('Price', priceSchema);
+const Price = mongoose.model('Price', priceSchema);
+
+const retrievePrices = (id) => {
+  if (id) {
+    return Price.find({ productId: id })
+      .sort({ productId: 1 });
+  }
+  return Price.find()
+    .sort({ productId: 1 });
+};
+
+module.exports = {
+  Price,
+  retrievePrices,
+};

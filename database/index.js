@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/seller-catalog', { useMongoClient: true });
+mongoose.connect('mongodb://localhost/seller-catalog', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
 
 const db = mongoose.connection;
 db.on('error', () => {

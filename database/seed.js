@@ -5,7 +5,11 @@ mongoose.Promise = require('bluebird');
 const { Price } = require('./models/prices');
 const { Seller } = require('./models/sellers');
 
-mongoose.connect('mongodb://localhost/seller-catalog', { useMongoClient: true });
+mongoose.connect('mongodb://localhost/seller-catalog', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
 
 // Preparing product documents
 

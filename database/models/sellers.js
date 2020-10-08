@@ -12,4 +12,13 @@ const sellerSchema = new mongoose.Schema({
   },
 });
 
-module.exports.Seller = mongoose.model('Seller', sellerSchema);
+const Seller = mongoose.model('Seller', sellerSchema);
+
+const retrieveSellers = () => Seller.find()
+  .limit()
+  .sort({ productId: 1 });
+
+module.exports = {
+  Seller,
+  retrieveSellers,
+};
