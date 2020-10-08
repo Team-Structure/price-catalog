@@ -4,12 +4,12 @@ const { createQuotes } = require('../services/quotes');
 
 const prices = (req, res) => {
   retrievePrices()
-    .then((data) => res.send(data));
+    .then((productData) => res.send(productData));
 };
 
 const sellers = (req, res) => {
   retrieveSellers()
-    .then((data) => res.send(data));
+    .then((sellerData) => res.send(sellerData));
 };
 
 const quotes = (req, res) => {
@@ -21,16 +21,16 @@ const quotes = (req, res) => {
   }
 
   retrieveSellers()
-    .then((data) => {
-      sellerInfo = data;
+    .then((sellerData) => {
+      sellerInfo = sellerData;
       return retrievePrices(id);
     })
-    .then((data) => {
-      priceInfo = data;
+    .then((productData) => {
+      priceInfo = productData;
       return true;
     })
     .then(() => createQuotes(priceInfo, sellerInfo, req.query.sellerLimit))
-    .then((data) => res.send(data));
+    .then((quoteData) => res.send(quoteData));
 };
 
 module.exports = {

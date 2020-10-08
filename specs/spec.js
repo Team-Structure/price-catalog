@@ -1,22 +1,13 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable global-require */
 /* eslint-disable no-undef */
 const { expect } = require('chai');
 const mongoose = require('mongoose');
-const { Price, retrievePrices } = require('../database/models/prices');
-const { Seller, retrieveSellers } = require('../database/models/sellers');
+const request = require('supertest')('http://localhost:3002');
+const { Price } = require('../database/models/prices');
+const { Seller } = require('../database/models/sellers');
 
 describe('Database seeded', () => {
-  before(() => {
-    mongoose.connect('mongodb://localhost/seller-catalog', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-    });
-  });
-  after(() => {
-    mongoose.disconnect();
-  });
-
   it('Database seeded with 100 Products', () => {
     let productCount = 0;
     Price.countDocuments()
@@ -37,12 +28,59 @@ describe('Database seeded', () => {
   });
 });
 
+describe('Test API routes', () => {
+  const priceOptions = [9.99, 19.99, 29.99, 39.99, 49.99, 59.99, 99.99];
+  const sellerOptions = [
+    'Tortor',
+    'Nisl',
+    'Consequat',
+    'Vulputate Ut',
+    'Adipiscing Elit Pellentesque',
+    'Fames Nunc',
+    'Ultricies',
+    'Morbi',
+    'Odio',
+    'Sit Amet',
+  ];
+
+  it('Fetch product pricing data, test /product/prices route', () => {
+    request.get('/api/product/prices')
+      .expect((res) => {
+        expect(priceOptions.includes(res.body[0].seller[0].price)).to.equal(true);
+      })
+      .end((err) => {
+        if (err) throw err;
+      });
+  });
+
+  it('Fetch product seller data, test /product/sellers route', () => {
+    request.get('/api/product/sellers')
+      .expect((res) => {
+        expect(sellerOptions.includes(res.body[0].name)).to.equal(true);
+      })
+      .end((err) => {
+        if (err) throw err;
+      });
+  });
+
+  it('Fetch product quotes data, test /product/quotes route', () => {
+    request.get('/api/product/quotes')
+      .expect((res) => {
+        expect(priceOptions.includes(res.body[0].seller[0].price)).to.equal(true);
+        expect(sellerOptions.includes(res.body[0].seller[0].name)).to.equal(true);
+      })
+      .end((err) => {
+        if (err) throw err;
+      });
+  });
+});
+
 describe('Test helper functions', () => {
   const {
-    name,
-    offer,
-    returnPolicy,
-    shippingFee,
+    sellerName,
+    sellerOffer,
+    sellerReturnPolicy,
+    sellerShippingFee,
   } = require('../services/helper');
 
   const sellersSample = [{
@@ -67,42 +105,42 @@ describe('Test helper functions', () => {
   const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   it('name helper returns seller name when id exists in sellersSample', () => {
-    const passName = name(passId, sellersSample);
+    const passName = sellerName(passId, sellersSample);
     expect(passName).to.equal('Test');
   });
 
-  it('offer helper returns empty string when id does not exist in sellersSample', () => {
-    const failName = name(failId, sellersSample);
+  it('name helper returns empty string when id does not exist in sellersSample', () => {
+    const failName = sellerName(failId, sellersSample);
     expect(failName).to.equal('');
   });
 
   it('offer helper returns offer when id exists in sellersSample', () => {
-    const passOffer = offer(passId, sellersSample);
+    const passOffer = sellerOffer(passId, sellersSample);
     expect(passOffer).to.equal(`Free delivery by ${dayOfTheWeek[deliveryDay.getDay()]}, ${month[deliveryDay.getMonth()]} ${deliveryDay.getDate()}`);
   });
 
   it('offer helper returns empty string when id does not exist in sellersSample', () => {
-    const failOffer = offer(failId, sellersSample);
+    const failOffer = sellerOffer(failId, sellersSample);
     expect(failOffer).to.equal('');
   });
 
   it('returnPolicy helper returns returnPolicy when id exists in sellersSample', () => {
-    const passReturn = returnPolicy(passId, sellersSample);
+    const passReturn = sellerReturnPolicy(passId, sellersSample);
     expect(passReturn).to.equal('Test Return');
   });
 
   it('returnPolicy helper returns empty string when id does not exist in sellersSample', () => {
-    const failReturn = returnPolicy(failId, sellersSample);
+    const failReturn = sellerReturnPolicy(failId, sellersSample);
     expect(failReturn).to.equal('');
   });
 
   it('shippingFee helper returns shippingFee when id exists in sellersSample', () => {
-    const passShipping = shippingFee(passId, sellersSample);
+    const passShipping = sellerShippingFee(passId, sellersSample);
     expect(passShipping).to.equal(0);
   });
 
   it('shippingFee helper returns empty string when id does not exist in sellersSample', () => {
-    const failShipping = shippingFee(failId, sellersSample);
+    const failShipping = sellerShippingFee(failId, sellersSample);
     expect(failShipping).to.equal('');
   });
 });

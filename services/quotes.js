@@ -1,8 +1,8 @@
 const {
-  name,
-  offer,
-  returnPolicy,
-  shippingFee,
+  sellerName,
+  sellerOffer,
+  sellerReturnPolicy,
+  sellerShippingFee,
 } = require('./helper');
 
 /* eslint-disable no-plusplus */
@@ -10,16 +10,16 @@ module.exports.createQuotes = (prices, sellers, limit) => {
   const response = [];
   const fetchSellerMeta = (num, tag, array) => {
     if (tag === 'name') {
-      return name(num, array);
+      return sellerName(num, array);
     }
     if (tag === 'offer') {
-      return offer(num, array);
+      return sellerOffer(num, array);
     }
     if (tag === 'returnPolicy') {
-      return returnPolicy(num, array);
+      return sellerReturnPolicy(num, array);
     }
     if (tag === 'shippingFee') {
-      return shippingFee(num, array);
+      return sellerShippingFee(num, array);
     }
     return null;
   };
