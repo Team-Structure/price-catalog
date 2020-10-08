@@ -7,12 +7,17 @@ const request = require('supertest')('http://localhost:3002');
 const { Price } = require('../database/models/prices');
 const { Seller } = require('../database/models/sellers');
 
+mongoose.connect('mongodb://localhost/seller-catalog', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
+
 describe('Database seeded', () => {
   it('Database seeded with 100 Products', () => {
     let productCount = 0;
     Price.countDocuments()
       .then((count) => {
-        mongoose.disconnect();
         productCount = count;
         expect(productCount).to.equal(100);
       });
