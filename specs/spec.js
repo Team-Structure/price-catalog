@@ -4,7 +4,10 @@
 require('dotenv').config();
 const { expect } = require('chai');
 const mongoose = require('mongoose');
-const request = require('supertest')('http://localhost:3002');
+
+const hostname = process.env.HOST;
+const { PORT } = process.env;
+const request = require('supertest')(`http://${hostname}:${PORT}`);
 const { Price } = require('../database/models/prices');
 const { Seller } = require('../database/models/sellers');
 
