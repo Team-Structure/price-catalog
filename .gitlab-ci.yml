@@ -18,13 +18,12 @@ build:
   stage: build
   script:
     - npm install
+    - npm run seed
 
 test:
   stage: test
-  before_script:
-    - npm run start
-    - npm run seed
   script:
+    - npm run start
     - npx mocha specs/spec.js
   after_script:
     - pkill node
