@@ -1,13 +1,28 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable global-require */
 /* eslint-disable no-undef */
+require('dotenv').config();
 const { expect } = require('chai');
 const mongoose = require('mongoose');
 const request = require('supertest')('http://localhost:3002');
 const { Price } = require('../database/models/prices');
 const { Seller } = require('../database/models/sellers');
 
+const mochaHooks = () => {
+  before(() => {
+    mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    });
+  });
+  after(() => {
+    mongoose.connection.close();
+  });
+};
+
 describe('Database seeded', () => {
+  mochaHooks();
   it('Database seeded with 100 Products', () => {
     let productCount = 0;
     Price.countDocuments()
@@ -29,6 +44,7 @@ describe('Database seeded', () => {
 });
 
 describe('Test API routes', () => {
+  mochaHooks();
   const priceOptions = [9.99, 19.99, 29.99, 39.99, 49.99, 59.99, 99.99];
   const sellerOptions = [
     'Tortor',
@@ -88,6 +104,7 @@ describe('Test API routes', () => {
 });
 
 describe('Test helper functions', () => {
+  mochaHooks();
   const {
     sellerName,
     sellerOffer,

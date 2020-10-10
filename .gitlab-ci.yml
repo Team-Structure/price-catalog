@@ -18,7 +18,6 @@ build:
   stage: build
   script:
     - npm install
-    - node server/index.js
 
 test:
   stage: test
