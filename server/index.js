@@ -6,8 +6,8 @@ const db = require('../database');
 const router = require('./routes');
 
 const app = express();
-const hostname = process.env.HOST;
-const { PORT } = process.env;
+const hostname = process.env.HOST || 'localhost';
+const PORT = process.env.PORT || 3002;
 
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 

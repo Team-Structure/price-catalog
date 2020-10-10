@@ -4,8 +4,8 @@
 require('dotenv').config();
 const { expect } = require('chai');
 
-const hostname = process.env.HOST;
-const { PORT } = process.env;
+const hostname = process.env.HOST || 'localhost';
+const PORT = process.env.PORT || 3002;
 const request = require('supertest')(`http://${hostname}:${PORT}`);
 const { Price } = require('../database/models/prices');
 const { Seller } = require('../database/models/sellers');
@@ -54,7 +54,6 @@ describe('Test API routes', () => {
   it('Fetch product pricing data with productId, test /product/prices route', () => {
     request.get('/api/product/prices?productId=1')
       .expect((res) => {
-        console.log(res.body[0]);
         expect(res.body[0].productId).to.equal(1);
         expect(res.body.length).to.equal(1);
       })
