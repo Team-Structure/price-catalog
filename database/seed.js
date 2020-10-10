@@ -1,4 +1,5 @@
 /* eslint-disable no-plusplus */
+require('dotenv').config();
 const mongoose = require('mongoose');
 const Promise = require('bluebird');
 mongoose.Promise = require('bluebird');

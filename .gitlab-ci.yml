@@ -21,5 +21,10 @@ build:
 
 test:
   stage: test
+  before_script:
+    - npm run start
+    - npm run seed
   script:
     - npx mocha specs/spec.js
+  after_script:
+    - pkill node
