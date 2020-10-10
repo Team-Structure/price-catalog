@@ -2,3 +2,4 @@ node_modules
 client/dist/bundle.js
 .nyc_output
 .env
+nohup.out

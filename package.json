@@ -10,7 +10,7 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "dev": "nodemon server/index.js",
-    "start": "node server/index.js",
+    "start": "nohup node server/index.js &",
     "lint": "eslint client/src/index.jsx server services",
     "seed": "node database/seed.js",
     "test": "nyc mocha specs/spec.js"

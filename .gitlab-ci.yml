@@ -9,6 +9,8 @@ services:
 
 variables:
   MONGO_URI: 'mongodb://mongo/seller-catalog'
+  HOST: 'localhost'
+  PORT: '3002'
 
 stages:
   - build
@@ -22,8 +24,9 @@ build:
 
 test:
   stage: test
-  script:
+  before_script:
     - npm run start
+  script:
     - npx mocha specs/spec.js
   after_script:
     - pkill node
