@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const path = require('path');
 // eslint-disable-next-line no-unused-vars
 const db = require('../database');

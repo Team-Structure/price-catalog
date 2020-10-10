@@ -5,7 +5,7 @@ mongoose.Promise = require('bluebird');
 const { Price } = require('./models/prices');
 const { Seller } = require('./models/sellers');
 
-mongoose.connect('mongodb://localhost/seller-catalog', {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
