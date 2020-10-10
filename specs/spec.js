@@ -1,9 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable global-require */
 /* eslint-disable no-undef */
+require('dotenv').config();
 const { expect } = require('chai');
-const mongoose = require('mongoose');
-const request = require('supertest')('http://localhost:3002');
+
+const hostname = process.env.HOST || 'localhost';
+const PORT = process.env.PORT || 3002;
+const request = require('supertest')(`http://${hostname}:${PORT}`);
 const { Price } = require('../database/models/prices');
 const { Seller } = require('../database/models/sellers');
 
@@ -12,9 +15,11 @@ describe('Database seeded', () => {
     let productCount = 0;
     Price.countDocuments()
       .then((count) => {
-        mongoose.disconnect();
         productCount = count;
         expect(productCount).to.equal(100);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   });
 
@@ -24,6 +29,9 @@ describe('Database seeded', () => {
       .then((count) => {
         sellerCount = count;
         expect(sellerCount).to.equal(10);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   });
 });

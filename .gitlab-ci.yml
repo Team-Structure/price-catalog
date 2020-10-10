@@ -1,0 +1,31 @@
+image: node:latest
+
+cache:
+  paths:
+    - node_modules/
+
+services:
+  - mongo:latest
+
+variables:
+  MONGO_URI: 'mongodb://mongo/seller-catalog'
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - npm install
+    - npm run lint
+
+test:
+  stage: test
+  before_script:
+    - npm run start
+    - npm run seed
+  script:
+    - npx mocha specs/spec.js
+  after_script:
+    - pkill node

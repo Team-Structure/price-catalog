@@ -10,13 +10,15 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "dev": "nodemon server/index.js",
-    "lint": "eslint client/src/index.jsx server services",
+    "start": "nohup node server/index.js &",
+    "lint": "eslint . --ext .js",
     "seed": "node database/seed.js",
     "test": "nyc mocha specs/spec.js"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
     "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jquery": "^3.5.1",
     "mongodb": "^3.6.2",
