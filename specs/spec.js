@@ -54,6 +54,7 @@ describe('Test API routes', () => {
   it('Fetch product pricing data with productId, test /product/prices route', () => {
     request.get('/api/product/prices?productId=1')
       .expect((res) => {
+        console.log(res.body[0]);
         expect(res.body[0].productId).to.equal(1);
         expect(res.body.length).to.equal(1);
       })
