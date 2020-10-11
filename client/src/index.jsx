@@ -35,6 +35,9 @@ const App = () => (
         <div className="store">
           Stuff From India
         </div>
+        <div className="gGuarantee">
+          Google Guarantee &#9432;
+        </div>
       </div>
       <div className="buttonSpace">
         <div className="fRight">
@@ -56,6 +59,9 @@ const App = () => (
         <div>Return-eligible for 30 days</div>
         <div className="store">
           Swiftsy
+        </div>
+        <div className="gGuarantee">
+          Google Guarantee &#9432;
         </div>
       </div>
       <div className="buttonSpace">

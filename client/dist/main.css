@@ -99,3 +99,10 @@ body {
   vertical-align: middle;
   width: 15px;
 }
+
+.gGuarantee {
+  font-size: 12px;
+  line-height: 18px;
+  color: #70757a;
+  margin-top: 5px;
+}
