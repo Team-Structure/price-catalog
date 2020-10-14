@@ -14,8 +14,11 @@ module.exports = {
       }
     ]
   },
-   output: {
-    filename: 'bundle.js',
+  output: {
+    filename: 'bundle-seller-catalog.js',
     path: __dirname + '/client/dist'
-  }
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
 };
