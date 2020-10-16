@@ -2,10 +2,10 @@ import React from 'react';
 import Header from './header';
 import Options from './options';
 
-const App = () => (
+const App = ({ match }) => (
   <div id="container">
     <Header />
-    <Options />
+    <Options productId={match.params.id} />
   </div>
 );
 
