@@ -31,10 +31,6 @@ class Options extends React.Component {
   }
 
   render() {
-    console.log(this.state);
-
-    console.log(this.state.quotes);
-
     if (this.state.quotes.length) {
       const sellerOptions = this.state.quotes[0].seller.map((option) => (
         <div className="sellerOption" key={option.id}>
