@@ -11,14 +11,29 @@ module.exports = {
             presets: ['@babel/preset-react', '@babel/preset-env']
           }
         }
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            }
+          },
+          // ['style-loader', 'css-loader'],
+        ]
       }
     ]
   },
-   output: {
+  output: {
     filename: 'bundle-seller-catalog.js',
     path: __dirname + '/client/dist'
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.css'],
   },
 };

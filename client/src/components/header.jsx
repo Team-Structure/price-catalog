@@ -1,11 +1,12 @@
 import React from 'react';
+import styles from './main.module.css';
 
 const Header = () => (
   <div>
-    <div id="element1">
+    <div id={styles.element1}>
       Buying options
-      <div className="fRight">
-        <div id="about">About &#9432;</div>
+      <div className={styles.fRight}>
+        <div id={styles.about}>About &#9432;</div>
       </div>
     </div>
   </div>
