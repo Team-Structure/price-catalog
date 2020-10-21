@@ -26,6 +26,6 @@ test:
     - npm run start
     - npm run seed
   script:
-    - npx mocha specs/spec.js
+    - npx mocha specs/server.js
   after_script:
     - pkill node
