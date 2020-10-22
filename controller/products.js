@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-restricted-globals */
 const { retrievePrices } = require('../database/models/prices');
 const { retrieveSellers } = require('../database/models/sellers');
