@@ -36,7 +36,7 @@ module.exports.createQuotes = (prices, sellers, limit) => {
       const sellerObject = {
         id,
         price,
-        tax,
+        tax: tax.toFixed(2),
         shippingFee: deliveryFee,
         totalPrice: (price + tax + deliveryFee).toFixed(2),
         returnPolicy: fetchSellerMeta(id, 'returnPolicy', sellers),
@@ -45,7 +45,7 @@ module.exports.createQuotes = (prices, sellers, limit) => {
       };
       product.seller.push(sellerObject);
     }
-    product.seller.sort((a, b) => a.price - b.price);
+    product.seller.sort((a, b) => a.totalPrice - b.totalPrice);
     if (limit) {
       product.seller.splice(limit);
     }

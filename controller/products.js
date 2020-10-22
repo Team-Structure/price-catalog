@@ -18,6 +18,7 @@ const sellers = (req, res) => {
 };
 
 const quotes = (req, res) => {
+  console.log(req.query);
   let priceInfo;
   let sellerInfo;
   let id = null;

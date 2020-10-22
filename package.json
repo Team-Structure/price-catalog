@@ -13,7 +13,7 @@
     "start": "nohup node server/index.js &",
     "lint": "eslint . --ext .js",
     "seed": "node database/seed.js",
-    "test": "nyc mocha specs/spec.js"
+    "test": "nyc mocha specs/server.js"
   },
   "dependencies": {
     "bluebird": "^3.7.2",
@@ -25,13 +25,17 @@
     "mongoose": "^5.10.7",
     "path": "^0.12.7",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
+    "css-loader": "^5.0.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
     "eslint": "^7.9.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
@@ -41,6 +45,7 @@
     "eslint-plugin-react-hooks": "^4.1.2",
     "nodemon": "^2.0.4",
     "nyc": "^15.1.0",
+    "style-loader": "^2.0.0",
     "supertest": "^5.0.0",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
