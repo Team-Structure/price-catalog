@@ -10,11 +10,11 @@ class Options extends React.Component {
     this.state = {
       productId,
       quotes: [],
+      error: null,
     };
   }
 
   componentDidMount() {
-    console.log('Calling');
     $.ajax({
       url: '/api/product/quotes',
       method: 'GET',
@@ -28,10 +28,18 @@ class Options extends React.Component {
           quotes: priceQuotes,
         });
       })
-      .fail((error) => console.log(error));
+      .fail((error) => {
+        console.log(error);
+        this.setState({
+          error: 'Product Not Found.',
+        });
+      });
   }
 
   render() {
+    if (this.state.error) {
+      return <h3>{this.state.error}</h3>;
+    }
     if (this.state.quotes.length) {
       const sellerOptions = this.state.quotes[0].seller.map((option) => (
         <div className={styles.sellerOption} key={option.id}>

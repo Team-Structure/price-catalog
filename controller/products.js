@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 const { retrievePrices } = require('../database/models/prices');
 const { retrieveSellers } = require('../database/models/sellers');
 const { createQuotes } = require('../services/quotes');
@@ -18,13 +19,21 @@ const sellers = (req, res) => {
 };
 
 const quotes = (req, res) => {
-  console.log(req.query);
-  let priceInfo;
-  let sellerInfo;
   let id = null;
   if (req.query.productId) {
     id = req.query.productId;
   }
+
+  if (id && isNaN(Number(id))) {
+    return res.status(400).send('Bad Request.');
+  }
+
+  if (id && (id < 1 || id > 100)) {
+    return res.status(404).send('Product Not Found.');
+  }
+
+  let priceInfo;
+  let sellerInfo;
 
   retrieveSellers()
     .then((sellerData) => {
@@ -36,7 +45,8 @@ const quotes = (req, res) => {
       return true;
     })
     .then(() => createQuotes(priceInfo, sellerInfo, req.query.sellerLimit))
-    .then((quoteData) => res.send(quoteData));
+    .then((quoteData) => res.send(quoteData))
+    .catch(() => res.status(500).send('Internal Server Error.'));
 };
 
 module.exports = {
