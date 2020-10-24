@@ -24,7 +24,6 @@ module.exports = {
               modules: true,
             }
           },
-          // ['style-loader', 'css-loader'],
         ]
       }
     ]

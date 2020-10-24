@@ -9,27 +9,37 @@
   },
   "scripts": {
     "react-dev": "webpack -d --watch",
+    "react": "webpack",
     "dev": "nodemon server/index.js",
     "start": "nohup node server/index.js &",
     "lint": "eslint . --ext .js",
     "seed": "node database/seed.js",
-    "test": "nyc mocha specs/server.js"
+    "test:server": "nyc mocha specs/server.js",
+    "test:client": "jest"
   },
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/polyfill": "^7.12.1",
+    "babel-jest": "^26.6.0",
+    "babel-plugin-css-modules-transform": "^1.6.2",
+    "babel-plugin-react-css-modules": "^5.2.6",
     "bluebird": "^3.7.2",
     "chai": "^4.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jest": "^26.6.0",
     "jquery": "^3.5.1",
     "mongodb": "^3.6.2",
     "mongoose": "^5.10.7",
     "path": "^0.12.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "sinon": "^9.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
+    "@babel/plugin-syntax-jsx": "^7.12.1",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",

@@ -5,10 +5,10 @@ import $ from 'jquery';
 import styles from './main.module.css';
 
 class Options extends React.Component {
-  constructor({ productId }) {
-    super({ productId });
+  constructor(props) {
+    super(props);
     this.state = {
-      productId,
+      productId: this.props.productId,
       quotes: [],
       error: null,
     };
@@ -28,8 +28,7 @@ class Options extends React.Component {
           quotes: priceQuotes,
         });
       })
-      .fail((error) => {
-        console.log(error);
+      .fail(() => {
         this.setState({
           error: 'Product Not Found.',
         });
