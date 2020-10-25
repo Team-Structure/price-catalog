@@ -116,7 +116,7 @@ describe('Test API failure scenarios', () => {
       });
   });
 
-  it('returns 404 when productId is a number more than 100', () => {
+  it('returns 404 when no product matching productID passed in query is found', () => {
     request.get('/api/product/quotes?productId=101')
       .expect((res) => {
         expect(res.status).to.equal(404);

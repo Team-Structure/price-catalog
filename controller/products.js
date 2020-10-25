@@ -44,10 +44,9 @@ const quotes = (req, res) => {
     .then(() => createQuotes(priceInfo, sellerInfo, req.query.sellerLimit))
     .then((quoteData) => {
       if (!quoteData.length) {
-        res.status(404).send('Product Not Found.');
-      } else {
-        res.send(quoteData);
+        return res.status(404).send('Product Not Found.');
       }
+      return res.send(quoteData);
     })
     .catch(() => res.status(500).send('Internal Server Error.'));
 };
