@@ -6,8 +6,6 @@ module.exports = function (api) {
   ];
   const plugins = [
     '@babel/plugin-transform-runtime',
-    'babel-plugin-react-css-modules',
-    'babel-plugin-css-modules-transform',
   ];
 
   api.cache(false);

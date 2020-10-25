@@ -29,10 +29,6 @@ const quotes = (req, res) => {
     return res.status(400).send('Bad Request.');
   }
 
-  if (id && (id < 1 || id > 100)) {
-    return res.status(404).send('Product Not Found.');
-  }
-
   let priceInfo;
   let sellerInfo;
 
@@ -46,7 +42,13 @@ const quotes = (req, res) => {
       return true;
     })
     .then(() => createQuotes(priceInfo, sellerInfo, req.query.sellerLimit))
-    .then((quoteData) => res.send(quoteData))
+    .then((quoteData) => {
+      if (!quoteData.length) {
+        res.status(404).send('Product Not Found.');
+      } else {
+        res.send(quoteData);
+      }
+    })
     .catch(() => res.status(500).send('Internal Server Error.'));
 };
 
