@@ -16,7 +16,7 @@
     "react-dev": "webpack -d --watch",
     "react": "webpack --mode=production",
     "dev": "nodemon server/index.js",
-    "start": "NODE_ENV=production node server/index.js",
+    "start": "NODE_ENV=production nohup node server/index.js &",
     "lint": "eslint . --ext .js",
     "seed": "node database/seed.js",
     "test:server": "nyc mocha specs/server.js",
