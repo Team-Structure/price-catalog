@@ -95,6 +95,38 @@ describe('Test API routes', () => {
   });
 });
 
+describe('Test API failure scenarios', () => {
+  it('returns 400 when productId is not a number', () => {
+    request.get("/api/product/quotes?productId='a'")
+      .expect((res) => {
+        expect(res.status).to.equal(400);
+      })
+      .end((err) => {
+        if (err) throw err;
+      });
+  });
+
+  it('returns 404 when productId is a number less than 1', () => {
+    request.get('/api/product/quotes?productId=0')
+      .expect((res) => {
+        expect(res.status).to.equal(404);
+      })
+      .end((err) => {
+        if (err) throw err;
+      });
+  });
+
+  it('returns 404 when no product matching productID passed in query is found', () => {
+    request.get('/api/product/quotes?productId=101')
+      .expect((res) => {
+        expect(res.status).to.equal(404);
+      })
+      .end((err) => {
+        if (err) throw err;
+      });
+  });
+});
+
 describe('Test helper functions', () => {
   const {
     sellerName,

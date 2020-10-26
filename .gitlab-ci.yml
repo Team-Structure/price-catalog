@@ -24,8 +24,10 @@ test:
   stage: test
   before_script:
     - npm run start
+    - npm run react
     - npm run seed
   script:
     - npx mocha specs/server.js
+    - npx jest
   after_script:
     - pkill node

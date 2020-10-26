@@ -5,16 +5,16 @@ import $ from 'jquery';
 import styles from './main.module.css';
 
 class Options extends React.Component {
-  constructor({ productId }) {
-    super({ productId });
+  constructor(props) {
+    super(props);
     this.state = {
-      productId,
+      productId: this.props.productId,
       quotes: [],
+      error: null,
     };
   }
 
   componentDidMount() {
-    console.log('Calling');
     $.ajax({
       url: '/api/product/quotes',
       method: 'GET',
@@ -28,10 +28,17 @@ class Options extends React.Component {
           quotes: priceQuotes,
         });
       })
-      .fail((error) => console.log(error));
+      .fail(() => {
+        this.setState({
+          error: 'Product Not Found.',
+        });
+      });
   }
 
   render() {
+    if (this.state.error) {
+      return <h3>{this.state.error}</h3>;
+    }
     if (this.state.quotes.length) {
       const sellerOptions = this.state.quotes[0].seller.map((option) => (
         <div className={styles.sellerOption} key={option.id}>
