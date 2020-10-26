@@ -23,8 +23,8 @@ build:
 test:
   stage: test
   before_script:
-    - npm run start
     - npm run react
+    - nohup node server/index.js &
     - npm run seed
   script:
     - npx mocha specs/server.js
