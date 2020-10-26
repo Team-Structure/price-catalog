@@ -23,9 +23,8 @@ build:
 test:
   stage: test
   before_script:
-    - npm run start
     - npm run react
-    - npm run seed
+    - npm run start
   script:
     - npx mocha specs/server.js
     - npx jest
