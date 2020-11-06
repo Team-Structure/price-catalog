@@ -1,11 +1,12 @@
 :local(#about) {
   font-size: 13px;
   color: #777;
+  background-color: white;
 }
 
 :local(#container) {
   box-sizing: content-box;
-  width: 353px;
+  width: 360px;
   flex-direction: column;
   min-height: 0vh;
   padding: 30px;
@@ -100,4 +101,56 @@
   line-height: 18px;
   color: #70757a;
   margin-top: 5px;
+}
+
+:local(#gImage) {
+  vertical-align: text-bottom;
+  width: 16px;
+  height: 16px;
+  margin-right: 2px;
+}
+
+:local(.aboutInfo) {
+  font-size: 12px;
+  line-height: 18px;
+  color: #70757a;
+  margin-top: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+:local(p) {
+  color: #222;
+  font-family: 'GoogleSans-Local',Roboto,Arial,Sans-Serif;
+  /* font-size: 13px; */
+  margin: 0;
+}
+
+:local(.infoTooltip) {
+  font-size: 12px;
+  line-height: 18px;
+  color: #70757a;
+  margin-top: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+:local(.tooltipTop) {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+:local(.tooltipBottom) {
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+:local(.gTooltip) {
+  font-size: 14px;
+  line-height: 18px;
+  color: #70757a;
+  margin-top: 8px;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
 }

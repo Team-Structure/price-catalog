@@ -33,9 +33,9 @@ describe('Test Header component', () => {
     expect(wrapper).to.have.lengthOf(1);
   });
 
-  it('Header child returns 5 children', () => {
+  it('Header child returns 6 children', () => {
     const wrapper = shallow(<Header />);
-    expect(wrapper.find('div').children()).to.have.lengthOf(5);
+    expect(wrapper.find('div').children()).to.have.lengthOf(6);
   });
 });
 
